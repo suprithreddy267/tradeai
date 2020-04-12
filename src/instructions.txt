@@ -1,0 +1,15 @@
+import these in your main file where you are calling the chart component
+import Test_Zoom from "./test_zoom"
+import Test_Zoom_Child from "./test_zoom_child";
+
+//your data should be an array of objects..each object should be in the form of {"year" : "2015","value" : "0.05"}
+
+
+<Test_Zoom data={yourdata} width = {2000} height = {100}>
+       
+            </Test_Zoom>
+
+/////////////////////////////////////////////////////////////////////////////////
+copy and paste the files in your folder
+1) test_zoom.js
+2) test_zoom_child.js
