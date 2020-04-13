@@ -3,6 +3,7 @@ import axios from 'axios'
 // import useAxios from 'axios-hooks'
 // import Tab from "./Tab"
 import {useParams} from "react-router"
+import Test_Zoom from './test_zoom'
 
 
 function Hs(){
@@ -13,19 +14,6 @@ function Hs(){
     const [list,setList] = useState([])
     const [loading,setloading] = useState(false)
     const [error,seterror] = useState(false)
-
-
-
-    // var url = 'http://159.65.150.184:9200/trade_analytica_march/_search'
-    
-
-
-    
-    // let query = get_query2(hscode)
-    
-
-
-
 
     useEffect(() => {
       var url = 'http://159.65.150.184:9200/hello_trade_analytica/_search'
@@ -72,9 +60,7 @@ function Hs(){
 
     return (
         <div>
-            <h2>{country}</h2>
-            <h2>{hscode}</h2>
-            <h4>{JSON.stringify(list)}</h4>
+            <Test_Zoom data={list} width={2000} height={100}/>
         </div>
     )
 }

@@ -7,6 +7,7 @@ import Tables from './tt'
 import Hscountry from './Hscountry';
 import Country from './Country'
 import Hscodename from './Hscodename'
+import Items from './Items'
 function App(){
   return(
     <Router>
@@ -19,7 +20,8 @@ function App(){
         <Route exact path="/" component={Tables} />
         <Route exact path="/trade/:country/:hscode" component={Hscountry} />
         <Route exact path="/country/:country" component={Country}></Route>
-        <Route exact path="/hscode/:hscode" component={Hscodename}></Route>
+        {/* <Route exact path="/hscode/:hscode" component={Hscodename}></Route> */}
+        <Route exact path="/hscode/:hscode" component={Items} />
         
         </Switch>
       </div>

@@ -6,14 +6,15 @@ import Test_Zoom_Child from "./test_zoom_child";
 
 function Test_Zoom(props) {
   const data = props.data;
-  const svgRef = useRef();
-  const svg = select(svgRef.current);
-  const svgContent = svg.select(".content")
+  
   const [selection, setSelection] = useState('');
-  const previousSelection = usePrevious(selection);
+  var [previousSelection,setpreviousSelection]=useState('')
   // const [currentZoomState, setCurrentZoomState] = useState();
   
   useEffect(() => {
+  const svg = select(".parentclass");
+  const svgContent = svg.select(".content")
+  setpreviousSelection=selection;
 
    const yextent = extent(data, d=>d.value)
    const xextent = extent(data, d=>d.year)
@@ -148,8 +149,9 @@ function Test_Zoom(props) {
   }, [data, selection, previousSelection]);
 
   return (
-      <React.Fragment>
-    <svg ref = {svgRef} width={props.width} height={props.height}>
+      <div>
+        <Test_Zoom_Child data={data} width = {2000} height = {500} selection = {selection}/><br></br>
+    <svg className="parentclass" width={props.width} height={props.height}>
     <defs>
             <clipPath id="myClipPath">
               <rect x="0" y="0" width="100%" height="100%" />
@@ -160,8 +162,8 @@ function Test_Zoom(props) {
           <g className = "y-axis"></g>
           <g className = "brush"></g>
         </svg>
-        <Test_Zoom_Child data={data} width = {2000} height = {500} selection = {selection}/>
-       </React.Fragment>
+        
+       </div>
        
   );
 
