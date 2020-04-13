@@ -4,7 +4,6 @@ import usePrevious from "./usePrevious";
 import { Children } from "react";
 import Test_Zoom_Child from "./test_zoom_child";
 
-
 function Test_Zoom(props) {
   const data = props.data;
   const svgRef = useRef();
@@ -12,17 +11,10 @@ function Test_Zoom(props) {
   const svgContent = svg.select(".content")
   const [selection, setSelection] = useState('');
   const previousSelection = usePrevious(selection);
-  
-
-	
   // const [currentZoomState, setCurrentZoomState] = useState();
   
-
   useEffect(() => {
-  
-    
-    
-	//console.log(data)
+
    const yextent = extent(data, d=>d.value)
    const xextent = extent(data, d=>d.year)
 
@@ -96,49 +88,21 @@ function Test_Zoom(props) {
         svgContent
           .selectAll(".tooltip")
           .data([d.value])
-          .join(enter => enter.append("text").attr("y"," yscale(d.value)"))
+          .join(enter => enter.append("text").attr("y", yscale(d.value)))
           .attr("class", "tooltip")
           .text(d.value)
           .attr("x", xscale(d.year))
           .attr("text-anchor", "middle")
           .attr("y", yscale(d.value)-10)
           .transition()
-          .duration(1000)
           .attr("opacity", 1)
       })
-       .on("mouseleave", () => svg.select(".tooltip").remove())
+      .on("mouseleave", () => svg.select(".tooltip").remove())
       .transition()
-      .attr("height", d => props.height - yscale(d.value)) //??why did they put this:no change even if commented
-
-
-     svg
-      .selectAll(".hbox")
-      .data(data)
-      .join("rect")
-      .attr("width",8)
-      .attr("height",yscale(yextent[0])-yscale(yextent[1]))
-      .attr("class","hbox")
-      .attr("x", (d) => xscale(d.year)-4)
-      .attr("y", (d) => yscale(yextent[1]))
-      .on("mouseover",(d) => {
-        //console.log(d)
-        svgContent
-        .append("text")
-        .attr("class","tooltip")
-        .text(d.value)
-        .attr("x", xscale(d.year))
-        .attr("text-anchor", "middle")
-        .attr("y", yscale(d.value)-10)
-        
-      
-
-      })
-      .on("mouseout",()=>{
-        svg.select(".tooltip").remove()
-      })
-      
+      .attr("height", d => props.height - yscale(d.value))
 
     
+     
    
     //   const zoomBehavior = zoom()
     //   .scaleExtent([1, 10])
@@ -185,7 +149,7 @@ function Test_Zoom(props) {
 
   return (
       <React.Fragment>
-    <svg ref = {svgRef.current} width={props.width} height={props.height}>
+    <svg ref = {svgRef} width={props.width} height={props.height}>
     <defs>
             <clipPath id="myClipPath">
               <rect x="0" y="0" width="100%" height="100%" />
@@ -195,7 +159,6 @@ function Test_Zoom(props) {
           <g className = "x-axis"></g>
           <g className = "y-axis"></g>
           <g className = "brush"></g>
-          
         </svg>
         <Test_Zoom_Child data={data} width = {2000} height = {500} selection = {selection}/>
        </React.Fragment>
